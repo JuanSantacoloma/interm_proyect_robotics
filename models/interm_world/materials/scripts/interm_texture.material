@@ -1,0 +1,14 @@
+material interm/texture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture textureEnsamble.png
+
+      }
+    }
+  }
+}
