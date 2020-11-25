@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
 
-		<!-- Robot Model -->
-        <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find phantom_urdf_ss)/urdf/phantom_description_gazebo.xacro'" />
-		<arg name="x" default="0"/>
-		<arg name="y" default="0"/>
-		<arg name="z" default="0"/>
+		<!-- Robot Model 1 -->
+        <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find interm_proyect_robotics)/urdf/phantom_description_gazebo.xacro'" />
+		<arg name="x" default="0.089695"/>
+		<arg name="y" default="0.119548"/>
+		<arg name="z" default="0.3896"/>
 
 		<!-- Load controllers -->
-        <rosparam command="load" file="$(find phantom_urdf_ss)/config/joints.yaml" />
+        <rosparam command="load" file="$(find interm_proyect_robotics)/config/joints.yaml" />
         
 		<!-- Controllers -->
 		<node name="controller_spawner" pkg="controller_manager" type="spawner"
@@ -22,6 +22,7 @@
 			gripper_position_controller
 		    --timeout 60">
 		</node>
+
 		<!-- State publisher -->
     	<node 
 			name="robot_state_publisher" 
@@ -35,13 +36,21 @@
 
 		<!-- Gazebo Initialization -->
 		<include file="$(find gazebo_ros)/launch/empty_world.launch">
-			<arg name="use_sim_time" value="true"/>
-		</include> 
+			<arg name="world_name" value ="intermidiate.world"/>
+			<arg name="paused" value ="false" />
+			<arg name="use_sim_time" value ="true" />
+			<arg name="gui" value ="true" />
+			<arg name="verbose" value ="False" />
+		</include>
 
-		<!-- Spawn Robot Model -->
+		<!-- Spawn Robot Model 1 -->
 		<node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
 			args="-urdf -param robot_description -model phantomX -x $(arg x) -y $(arg y) -z $(arg z)" />
 		      <!-- args="-urdf -param robot_description -model phantomX -x $(arg x) -y $(arg y) -z $(arg z)" /> -->
+
+		<!-- Spawn Robot Model 2 -->
+		<!-- <node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+			args="-urdf -param robot_description_2 -model phantomX -x $(arg x2) -y $(arg y2) -z $(arg z2)" /> -->
 
 		<!-- rqt -->
 		<node name="rqt_gui" pkg="rqt_gui" type="rqt_gui" />

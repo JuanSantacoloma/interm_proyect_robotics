@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <launch>
     <arg name="gui" value="true"/>
-    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find phantom_urdf_ss)/urdf/phantom_description_gazebo.xacro'"/>
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find interm_proyect_robotics)/urdf/phantom_description_gazebo.xacro'"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
     <node name="rviz" pkg="rviz" type="rviz" args=" -d $(find basic_2r_gazebo)/config/config.rviz"/> 
     <node if="$(arg gui)" name="joint_state_publisher" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" />
