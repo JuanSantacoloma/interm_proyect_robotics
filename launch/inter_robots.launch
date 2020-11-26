@@ -1,0 +1,24 @@
+<launch>
+  <!-- No namespace here as we will share this description. 
+       Access with slash at the beginning -->
+  <param name="robot_description"
+    command="$(find xacro)/xacro.py $(find interm_proyect_robotics)/urdf/phantom_description_gazebo.xacro" />
+
+  <!-- BEGIN ROBOT 1-->
+  <group ns="phantom1">
+    <param name="tf_prefix" value="phantom1_tf" />
+    <include file="$(find interm_proyect_robotics)/launch/interm_one_phantom.launch" >
+      <arg name="init_pose" value="-x 0.089695 -y 0.119548 -z 0.3896" />
+      <arg name="robot_name"  value="phantom1" />
+    </include>
+  </group>
+
+  <!-- BEGIN ROBOT 2-->
+  <group ns="phantom2">
+    <param name="tf_prefix" value="phantom2_tf" />
+    <include file="$(find interm_proyect_robotics)/launch/interm_one_phantom.launch" >
+      <arg name="init_pose" value="-x 0.430453 -y 0.119548 -z 0.3896" />
+      <arg name="robot_name"  value="phantom2" />
+    </include>
+  </group>
+</launch>
