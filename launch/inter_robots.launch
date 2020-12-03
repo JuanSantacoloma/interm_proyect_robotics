@@ -8,7 +8,7 @@
   <group ns="phantom1">
     <param name="tf_prefix" value="phantom1_tf" />
     <include file="$(find interm_proyect_robotics)/launch/interm_one_phantom.launch" >
-      <arg name="init_pose" value="-x 0.089695 -y 0.119548 -z 0.3896" />
+      <arg name="init_pose" value="-x 0.08 -y 0.119548 -z 0.36373" />
       <arg name="robot_name"  value="phantom1" />
     </include>
   </group>
@@ -17,7 +17,7 @@
   <group ns="phantom2">
     <param name="tf_prefix" value="phantom2_tf" />
     <include file="$(find interm_proyect_robotics)/launch/interm_one_phantom.launch" >
-      <arg name="init_pose" value="-x 0.430453 -y 0.119548 -z 0.3896" />
+      <arg name="init_pose" value="-x 0.430453 -y 0.119548 -z 0.36373" />
       <arg name="robot_name"  value="phantom2" />
     </include>
   </group>

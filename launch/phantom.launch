@@ -3,9 +3,9 @@
 
 		<!-- Robot Model 1 -->
         <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find interm_proyect_robotics)/urdf/phantom_description_gazebo.xacro'" />
-		<arg name="x" default="0.089695"/>
-		<arg name="y" default="0.119548"/>
-		<arg name="z" default="0.3896"/>
+		<arg name="x" default="0.08"/>
+		<arg name="y" default="0.0"/>
+		<arg name="z" default="0.363725"/>
 
 		<!-- Load controllers -->
         <rosparam command="load" file="$(find interm_proyect_robotics)/config/joints.yaml" />

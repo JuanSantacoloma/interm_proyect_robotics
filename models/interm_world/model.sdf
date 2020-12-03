@@ -4,7 +4,7 @@
     
     <!-- Model Link  -->
     <link name="base">
-      <pose>0 0 0.386 0 0 3.14159</pose>
+      <pose>0 0 0.363725 0 0 3.14159</pose>
 
       <collision name="collision">
         <geometry>
