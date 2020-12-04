@@ -16,7 +16,7 @@ function mover_phantom_2(a)
 % 
 %     phantom = SerialLink(phan,'name','Phatom X');
 %     phantom.tool = troty(90,'deg')*transl(0,0,l4);
-    figure(1)
+%     figure(1)
     q=[0,0,0,0];
 %     phantom.plot(q,'workspace',[-1 3 -2 2 -2 6],'noa','view',[-20.35 27.86])
 

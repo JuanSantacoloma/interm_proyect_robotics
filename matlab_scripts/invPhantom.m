@@ -13,10 +13,10 @@ function [q1,q2,q3,q4] = invPhantom(Tqobj)
     x = tras(1);
     y = tras(2);
     z = tras(3);
-    alpha = tr2angvec(R);
+%     alpha = tr2angvec(R);
 %     alpha = tr2eul(R);
-%     alpha = tr2rpy(R);
-    
+    alpha_aux = tr2rpy(R);
+    alpha = alpha_aux(1);
     % Inversa
     % r
     r_pri_2 = ((z-l1)^2)+(x)^2+(y)^2;

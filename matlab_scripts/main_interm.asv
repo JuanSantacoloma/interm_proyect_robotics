@@ -71,7 +71,7 @@ rot_nut = eye(3);
 
 %% Move phantom
 point_place = 1;
-n=5;
+n=10;
 move_done_screw = false;
 move_done_nut = false;
 
@@ -79,7 +79,7 @@ move_done_nut = false;
 %     T_pick_screw = get_point_pick_screw;
 %T_pick_nut = get_point_pick_nut;
 T_pick_screw = transl(1.372,0.2445,0.3500)*rpy2tr(180, 2.25, -90.0, 'deg');
-T_pick_nut = transl(0.2445,1.372,0.35)*rpy2tr(180, 2.25, -90.0, 'deg');
+T_pick_nut = transl(1.372,0.2445,0.3500)*rpy2tr(180, 2.25, -90.0, 'deg');
 
 T_place = get_point_place(point_place);
 % while point_place<=n
@@ -98,8 +98,7 @@ T_place = get_point_place(point_place);
     
 %     Pick trayectory
     for trayec_count=1:n
-        move_done_screw = false;
-        move_done_nut = false;   
+        
         mth_obj_screw = trayec_pick_screw(:,:,trayec_count)
         mth_obj_nut = trayec_pick_nut(:,:,trayec_count)
 
@@ -107,7 +106,7 @@ T_place = get_point_place(point_place);
         % Cinematica Inversa
         [q1_screw, q2_screw, q3_screw, q4_screw] = invPhantom(mth_obj_screw);
         % Creando vector con la configuracion de la trayectoria
-        a_screw = [q1_screw, q2_screw, q3_screw, q4_screw]
+        a_screw = [q1_screw, q2_screw, q3_screw, q4_screw];
 
         % Nut
         % Cinematica Inversa
@@ -117,19 +116,18 @@ T_place = get_point_place(point_place);
         
         % Move phantom pick
         while not(move_done_screw) && not(move_done_nut)
-            mover_phantom_screw(a_screw);
-            mover_phantom_nut(a_nut);
+            mover_phantom_screw(a_screw)
+            mover_phantom_nut(a_nut)
             
             move_done_screw = check_position_screw(a_screw);
             move_done_nut = check_position_nut(a_nut);
-            
         end
         
 %     end
     
 %  ************************************************************
     % Place trayectory
-%     trayec_place = ctraj(MTH_ogn_home,T_place , n);
+    trayec_place = ctraj(MTH_ogn_home,T_place , n);
     
     % Place trayectory
 %     for trayec_count=1:n
@@ -157,7 +155,7 @@ T_place = get_point_place(point_place);
 %             move_done_nut = check_position_nut(a_nut);
 %         end
 %         
-    end
+%     end
     
     point_place = point_place +1
-% end
+end
