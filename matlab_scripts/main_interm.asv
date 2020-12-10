@@ -34,12 +34,12 @@ sub2=rossubscriber('/phantom2/joint_states');
 qs=zeros(6,6);
 
 % Definifiendo punto inicia y final Screw
-xo_1=[x_screw,y_screw,10];
+xo_1=[x_screw,y_screw,0.3500];
 xf_1=get_point_place(1);
 xf_1 = xf_1(1:3,4)'*100;
 % Definifiendo punto inicia y final Nut
 xf_2=transl(-3.50,0,0)*get_point_place(2);
-xo_2=[x_nut,y_nut,10];
+xo_2=[x_nut,y_nut,0.3500];
 xf_2 = xf_2(1:3,4)'*100;
 % Enviando la orden screw
 picknplace(xo_1,xf_1,pub1,sub1,msg1)
@@ -59,9 +59,5 @@ picknplace(xo_2,xf_2,pub2,sub2,msg2)
 % as_m = [x_nut/1000,y_nut/1000,0.360/1000,1]';
 % punto= MTH_ogn_phan2*as_m
 %% Camera adqu
-% camList = webcamlist;
-% cam = webcam(1);
-% preview(cam);
-% img = snapshot(cam);
-% Display the frame in a figure window.
-% image(img);
+camList = webcamlist;
+cam = webcam(1)

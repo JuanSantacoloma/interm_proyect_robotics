@@ -16,7 +16,7 @@
         	<uri>model://interm_world</uri>
         </include>
 
-    <physics name='default_physics' default='0' type='ode'>
+    <!-- <physics name='default_physics' default='0' type='ode'>
       <ode>
         <solver>
           <type>quick</type>
@@ -25,6 +25,20 @@
           <sor>1.3</sor>
           <use_dynamic_moi_rescaling>0</use_dynamic_moi_rescaling>
         </solver>
+      </ode>
+      <max_step_size>0.0125</max_step_size>
+      <real_time_factor>1</real_time_factor>
+      <real_time_update_rate>80</real_time_update_rate>
+    </physics> -->
+    <physics type="ode">
+      <ode>
+        <solver>
+          <type>world</type>
+        </solver>
+        <constraints>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+          <contact_surface_layer>0.1</contact_surface_layer>
+        </constraints>
       </ode>
       <max_step_size>0.0125</max_step_size>
       <real_time_factor>1</real_time_factor>

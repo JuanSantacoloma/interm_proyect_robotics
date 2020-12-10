@@ -5,17 +5,30 @@
     <!-- Model Link  -->
     <link name="base">
       <pose>0 0 0.363725 0 0 3.14159</pose>
-
+      <inertial>
+        <mass>0.002</mass>
+        <inertia> 
+          <ixx>0.119</ixx> 
+          <ixy>0.0</ixy>   
+          <ixz>0.0</ixz>   
+          <iyy>0.119</iyy> 
+          <iyz>0.0</iyz>   
+          <izz>0.153</izz> 
+        </inertia>
+      </inertial>
+      
       <collision name="collision">
         <geometry>
+          <!-- <cylinder>
+            <radius>0.02</radius>
+            <length>0.02</length>
+          </cylinder> -->
+          <!-- <box>
+            <size>0.02 0.02 0.02</size>
+          </box> -->
           <mesh>
-            <!-- <scale>1.0 1.0 1.0</scale> -->
             <uri>model://nut/meshes/nut.dae</uri>
           </mesh>
-          <!-- <plane>
-            <normal>0 0 1</normal>
-            <size>2.4 2.4</size>
-          </plane> -->
         </geometry>
       </collision>
 
