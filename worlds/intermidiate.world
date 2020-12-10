@@ -37,13 +37,26 @@
         </solver>
         <constraints>
           <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
-          <contact_surface_layer>0.1</contact_surface_layer>
+          <contact_surface_layer>0.0001</contact_surface_layer>
         </constraints>
       </ode>
-      <max_step_size>0.0125</max_step_size>
+      <max_step_size>0.001</max_step_size>
       <real_time_factor>1</real_time_factor>
       <real_time_update_rate>80</real_time_update_rate>
     </physics>
+
+    <!-- <physics type="ode">
+      <ode>
+        <solver>
+          <type>world</type>
+        </solver>
+        <constraints>
+          <contact_max_correcting_vel>0.1</contact_max_correcting_vel>
+          <contact_surface_layer>0.0001</contact_surface_layer>
+        </constraints>
+      </ode>
+      <max_step_size>0.001</max_step_size>
+    </physics> -->
 
     </world>
 </sdf>
