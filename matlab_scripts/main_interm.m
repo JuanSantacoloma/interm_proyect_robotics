@@ -24,26 +24,22 @@ phantom.tool = troty(90,'deg')*transl(0,0,l4);
 rosshutdown;
 rosinit;
 
-pause(10)
+pause(1)
 
 %% Contruccion MTH 
-% ab = transl(1.622,-0.227,3.247)*rpy2tr(125.717, 80.210, 144.681, 'deg');
-% ab = transl(0.259,1.618,3.247)*rpy2tr(-95.769, 9.068, 0.912, 'deg');
-% ab = transl(0.0,1.329,1.524)*rpy2tr(-177.75, 0.0, 180, 'deg');
-% ab = transl(1.329,0.0,1.524)*rpy2tr(180, 2.25, -90.0, 'deg');
+% Run vision firts
+% Rotando el sistema de referencia de la vision
 
-% Punto de origen de la bandeja
-% ab = transl(1.252,0.3645,0.3500)*rpy2tr(180, 2.25, -90.0, 'deg');
-
-% Punto 1
-% ab = transl(1.372,0.2445,0.3500)*rpy2tr(180, 2.25, -90.0, 'deg');
-% Punto 2
-% ab = transl(1.5920,0.2445,0.3500)*rpy2tr(180, 2.25, -90.0, 'deg');
-% Punto 3
-% ab = transl(2.0320,0.2445,0.3500)*rpy2tr(180, 2.25, -90.0, 'deg');
-% Punto 4
-% ab = transl(2.2500,0.4645,0.3500)*rpy2tr(180, 2.25, -90.0, 'deg');
-ab = transl(0.0,1.950,1.294)*rpy2tr(-165.696,0.0,180, 'deg');
+% Screw
+pos_x_screw = (r_screw*cos(t_screw))*0.01;
+pos_y_screw = (r_screw*sin(t_screw))*0.01;
+pos_z_screw = 0.3500;
+rot_screw = rpy2tr(180, 2.25, -90.0, 'deg');
+% Nut
+pos_x_nut = (r_nut*cos(t_nut))*0.01;
+pos_y_nut = (r_nut*sin(t_nut))*0.01;
+pos_z_nut = 0.3500;
+rot_nut = rpy2tr(180, 2.25, -90.0, 'deg');
 
 % MTH de origen a base phantom 1
 MTH_ogn_phantom1 = transl(0.08,0.119548,0.36373);
@@ -57,17 +53,28 @@ MTH_ogn_home= transl(0.0,0.0,4.42)*rpy2tr(0.0, 0.0, 1.0, 'deg');
 % MTH de origen a base imagen nut
 % MTH_ogn_nut = transl(0.430453,0.119548,0.36373);
   
+T_pick_screw = transl(pos_x_screw,pos_y_screw,pos_z_screw)*rot_screw;
+T_pick_nut = transl(pos_x_nut,pos_y_nut,pos_z_nut)*rot_nut;
 
+mth_obj_screw = T_pick_screw
+mth_obj_nut = T_pick_nut
+        
+        
 % Screw
-pos_x_screw = 0.0;
-pos_y_screw = 0.0;
-pos_z_screw = 4.0;
-rot_screw = eye(3);
+% Cinematica Inversa
+[q1_screw, q2_screw, q3_screw, q4_screw] = invPhantom(mth_obj_screw);
+% Creando vector con la configuracion de la trayectoria
+a_screw = [q1_screw, q2_screw, q3_screw, q4_screw]
+
 % Nut
-pos_x_nut = 0.0;
-pos_y_nut = 0.0;
-pos_z_nut = 4.0;
-rot_nut = eye(3);
+% Cinematica Inversa
+[q1_nut, q2_nut, q3_nut, q4_nut] = invPhantom(mth_obj_nut);
+% Creando vector con la configuracion
+a_nut = [q1_nut, q2_nut, q3_nut, q4_nut];
+
+mover_phantom_screw(a_screw);
+mover_phantom_nut(a_nut);
+
 
 %% Move phantom
 point_place = 1;
@@ -78,10 +85,8 @@ move_done_nut = false;
 %     Objetivos
 %     T_pick_screw = get_point_pick_screw;
 %T_pick_nut = get_point_pick_nut;
-T_pick_screw = transl(1.372,0.2445,0.3500)*rpy2tr(180, 2.25, -90.0, 'deg');
-T_pick_nut = transl(0.2445,1.372,0.35)*rpy2tr(180, 2.25, -90.0, 'deg');
 
-T_place = get_point_place(point_place);
+% T_place = get_point_place(point_place);
 % while point_place<=n
 %     Flags
     move_done_screw = false;
@@ -102,7 +107,7 @@ T_place = get_point_place(point_place);
         move_done_nut = false;   
         mth_obj_screw = trayec_pick_screw(:,:,trayec_count)
         mth_obj_nut = trayec_pick_nut(:,:,trayec_count)
-
+        
         % Screw
         % Cinematica Inversa
         [q1_screw, q2_screw, q3_screw, q4_screw] = invPhantom(mth_obj_screw);
