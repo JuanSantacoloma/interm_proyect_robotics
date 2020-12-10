@@ -1,0 +1,14 @@
+material screw/texture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture tornillo.png
+
+      }
+    }
+  }
+}

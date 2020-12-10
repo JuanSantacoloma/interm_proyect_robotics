@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+<sdf version="1.5">
+  <model name="nut">
+    
+    <!-- Model Link  -->
+    <link name="base">
+      <pose>0 0 0.363725 0 0 3.14159</pose>
+
+      <collision name="collision">
+        <geometry>
+          <mesh>
+            <!-- <scale>1.0 1.0 1.0</scale> -->
+            <uri>model://nut/meshes/nut.dae</uri>
+          </mesh>
+          <!-- <plane>
+            <normal>0 0 1</normal>
+            <size>2.4 2.4</size>
+          </plane> -->
+        </geometry>
+      </collision>
+
+      <visual name="visual">
+        <geometry>
+          <mesh>
+            <!-- <scale>1.0 1.0 1.0</scale> -->
+            <uri>model://nut/meshes/nut.dae</uri>
+          </mesh>
+        </geometry>
+        
+        <material>
+          <script>
+            <uri>model://nut/materials/textures</uri>
+            <uri>model://nut/materials/scripts</uri>
+            <name>nut/texture</name>
+          </script>
+
+          <shader type = 'vertex'>
+            <normal_map>__default__</normal_map>
+          </shader>
+          <ambient>1 1 1 1</ambient>
+          <diffuse>1 1 1 1</diffuse>
+          <specular>1 1 1 1</specular>
+          <emissive>0 0 0 1</emissive>
+          <!-- <texture filename="file_path"/> -->
+        </material>
+
+      </visual>
+
+    </link>
+  </model>
+</sdf>

@@ -1,4 +1,4 @@
-function Q = cinInv2(r,t,z,b)
+function Q = cinInv(r,t,z,b)
     tcp = [r t z b];
     l1 = 42+94;
     l2 = 107;

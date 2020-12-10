@@ -1,0 +1,14 @@
+material nut/texture
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture tuerca.png
+
+      }
+    }
+  }
+}

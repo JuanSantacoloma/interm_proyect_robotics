@@ -12,13 +12,13 @@ rf=sqrt(xf(1)^2+xf(2)^2);
 thetaf=atan2(xf(2),xf(1));
 hf=xf(3);
 
-if ri<140
+if ri<200
     alpha_i=pi/2;
     hd=40;
     rd=20;
 else
     alpha_i=0;
-    hi=hi-22;
+    hi=hi+22;
     hd=80;
     rd=-10;
 end
@@ -74,12 +74,12 @@ wait_pos(q6,sub);
 set_pos(pub,msg,q7);
 wait_pos(q7,sub);
 %% 
-figure(1)
-stairs(rad2deg([qs(:,1) qs(:,2) qs(:,3) qs(:,4)]))
-legend('q1','q2','q3','q4')
-title('parametros articulares')
-xlabel('secuencia')
-ylabel('angulo(grados)')
-grid on
+% figure(1)
+% stairs(rad2deg([qs(:,1) qs(:,2) qs(:,3) qs(:,4)]))
+% legend('q1','q2','q3','q4')
+% title('parametros articulares')
+% xlabel('secuencia')
+% ylabel('angulo(grados)')
+% grid on
 end
 
