@@ -1,4 +1,4 @@
-function picknplace(xi,xf,pub,sub,msg)
+function picknplace(xi,xf,pub,sub,msg,alpha)
 %PICKNPLACE genera la secuencia de recoger y dejar un objeto
 %   x_i es la posición inicial respecto a la base, x_f es la posición final
 %   grip es la apertura del gripper y pub,sub son los publicadores y
@@ -6,7 +6,7 @@ function picknplace(xi,xf,pub,sub,msg)
 %   de las articulaciones
 %% Calculo de los puntos intermedios de la trayectoria
 ri=sqrt(xi(1)^2+xi(2)^2);
-thetai=atan2(xi(2),xi(1))
+thetai=atan2(xi(2),xi(1));
 hi=xi(3);
 rf=sqrt(xf(1)^2+xf(2)^2);
 thetaf=atan2(xf(2),xf(1));
@@ -24,8 +24,15 @@ else
 end
 qi=cinInv(ri,thetai,hi,alpha_i);
 qb=cinInv(ri-rd,thetai,hi+hd,alpha_i);
-qo=cinInv(rf,thetaf,hf+22,0);
-qd=cinInv(rf,thetaf,hf+30+22,0);
+
+if alpha ==pi/2
+    qo=cinInv(rf,thetaf,hf,alpha);
+    qd=cinInv(rf,thetaf,hf+30,alpha);
+else
+    qo=cinInv(rf,thetaf,hf+22,alpha);
+    qd=cinInv(rf,thetaf,hf+30+22,alpha);
+end
+
 
 if ~isreal(qi) || ~isreal(qb) || ~isreal(qo) || ~isreal(qd)
     display(qi)

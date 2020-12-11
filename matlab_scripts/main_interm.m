@@ -3,23 +3,6 @@
 %% Imagen analysis
 [img_out, x_screw, y_screw, x_nut, y_nut] = vision();
 
-%% Toolbox definition
-
-% links
-l1 = (137-0)/100;
-l2 = 105/100;
-l3 = 105/100;
-l4 = 95/100;
-% Robot
-phan(1) = Link('revolute', 'alpha',0,    'a',0,  'd',l1,'offset',-pi/2,'modified');
-phan(2) = Link('revolute', 'alpha',-pi/2,'a',0,  'd', 0,'offset',-pi/2,'modified');
-phan(3) = Link('revolute', 'alpha',0,    'a',l2, 'd', 0,'offset', 0,   'modified');
-phan(4) = Link('revolute', 'alpha',0,    'a',l3, 'd', 0,'offset', 0,   'modified');
-
-phantom = SerialLink(phan,'name','Phatom X');
-phantom.tool = troty(90,'deg')*transl(0,0,l4);
-
-
 %% ROS initiallization
 rosshutdown;
 rosinit;
@@ -35,33 +18,12 @@ qs=zeros(6,6);
 
 % Definifiendo punto inicia y final Screw
 xo_1=[x_screw,y_screw,10];
-xf_1=get_point_place(1);
-xf_1 = xf_1(1:3,4)'*100;
+xf_1=get_point_place_screw(1);
 % Definifiendo punto inicia y final Nut
-xf_2=transl(-3.50,0,0)*get_point_place(2);
 xo_2=[x_nut,y_nut,10];
-xf_2 = xf_2(1:3,4)'*100;
+xf_2=transl(-350,0,0)*[get_point_place_nut(3) 1]';
+xf_2=xf_2(1:3)';
 % Enviando la orden screw
-picknplace(xo_1,xf_1,pub1,sub1,msg1)
+% picknplace(xo_1,xf_1,pub1,sub1,msg1,pi/2)
 % Enviando la orden nut
-% picknplace(xo_2,xf_2,pub2,sub2,msg2)
-% %% Spawn objects gazebo
-% gazebo = ExampleHelperGazeboCommunicator;
-% nut = ExampleHelperGazeboModel('models/nut/model')
-% sphereLink = addLink(nut,"mesh",'models/nut/meshes/nut.dae',"color",[0 0 1 1])
-% spawnModel(gazebo,nut,[8.5 0 1])
-% %% 
-% MTH_ogn_phan1 = (transl(0.08,0.119548,0.36373));
-% as_m = [x_screw/1000,y_screw/1000,0.360/1000,1]';
-% punto= MTH_ogn_phan1*as_m
-% %%
-% MTH_ogn_phan2 = transl(0.430453,0.119548,0.36373);
-% as_m = [x_nut/1000,y_nut/1000,0.360/1000,1]';
-% punto= MTH_ogn_phan2*as_m
-%% Camera adqu
-% camList = webcamlist;
-% cam = webcam(1);
-% preview(cam);
-% img = snapshot(cam);
-% Display the frame in a figure window.
-% image(img);
+picknplace(xo_2,xf_2,pub2,sub2,msg2,0)

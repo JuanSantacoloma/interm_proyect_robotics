@@ -1,8 +1,8 @@
-function [MTH_point_place] = get_point_place(count_place)
+function [MTH_point_place] = get_point_place_screw(count_place)
    MTHs_place_points = zeros(4,4,28);
 %   Columna 1 1.372,0.2445,25
     MTHs_place_points(:,:,1) = transl(1.372,0.2445,0.7)*rpy2tr(180, 2.25, -90.0, 'deg');
-    MTHs_place_points(:,:,2) = transl(1.372,-0.7,1.4)*rpy2tr(180, 2.25, -90.0, 'deg');
+    MTHs_place_points(:,:,2) = transl(1.372,-0.7,1.1)*rpy2tr(180, 2.25, -90.0, 'deg');
     MTHs_place_points(:,:,3) = transl(2.032,0.2445,0.7)*rpy2tr(180, 2.25, -90.0, 'deg');
     MTHs_place_points(:,:,4) = transl(2.032,-0.7,1.4)*rpy2tr(180, 2.25, -90.0, 'deg');
     %   Columna 2
