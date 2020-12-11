@@ -24,15 +24,10 @@ else
 end
 qi=cinInv(ri,thetai,hi,alpha_i);
 qb=cinInv(ri-rd,thetai,hi+hd,alpha_i);
-qo=cinInv(rf,thetaf,hf+22,0);
-qd=cinInv(rf,thetaf,hf+30+22,0);
-
-if ~isreal(qi) || ~isreal(qb) || ~isreal(qo) || ~isreal(qd)
-    display(qi)
-    display(qb)
-    display(qo)
-    display(qd)
-    error('Posicion no alcanzable')
+qo=cinInv(rf,thetaf,hf,pi/2);
+qd=cinInv(rf,thetaf,hf+40,pi/2);
+if isreal(qi) || isreal(qb) || isreal(qo)
+    
 end
 %Aproximación
 q1=[qb(1:3) qi(4)];
